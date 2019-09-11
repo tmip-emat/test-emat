@@ -20,7 +20,7 @@ before_install:
 - conda update -q conda --no-deps
 - conda info -a # Useful for debugging any issues with conda
 - conda install --yes $DEPS
-- conda install emat -c tmip
+- conda install emat -c tmip -c defaults -c conda-forge
 - conda list
 
 install:
