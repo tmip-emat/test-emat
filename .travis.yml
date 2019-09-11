@@ -1,0 +1,31 @@
+# Travis config for testing TMIP-EMAT
+
+dist: xenial
+language: python
+sudo: false
+
+python:
+- "3.7"
+
+env:
+- DEPS="numpy matplotlib pandas jupyter ipyparallel nose pytest scikit-learn mock seaborn appdirs pydot plotly scipy"
+
+before_install:
+- wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh;
+- bash miniconda.sh -b -p $HOME/miniconda
+- export PATH="$HOME/miniconda/bin:$PATH"
+- hash -r
+- conda config --set always_yes yes --set changeps1 no
+- conda install -c conda conda-env
+- conda update -q conda --no-deps
+- conda info -a # Useful for debugging any issues with conda
+- conda install --yes $DEPS
+- conda install emat -c tmip
+- conda list
+
+install:
+- svn export https://github.com/tmip-emat/tmip-emat/trunk/tests --non-interactive --trust-server-cert-failures=unknown-ca
+
+script:
+- pytest ./tests
+
