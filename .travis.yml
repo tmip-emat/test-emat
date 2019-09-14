@@ -22,10 +22,12 @@ before_install:
 - conda install --yes $DEPS
 - conda install emat>=0.2.4 -c tmip -c defaults -c conda-forge -c plotly
 - conda list
+- conda env create TMIP/EMAT
 
 install:
 - svn export https://github.com/tmip-emat/tmip-emat/trunk/tests --non-interactive --trust-server-cert-failures=unknown-ca
 
 script:
 - pytest ./tests
-
+- conda activate EMAT
+- pytest ./tests
