@@ -20,7 +20,7 @@ before_install:
 - conda update -q conda --no-deps
 - conda info -a # Useful for debugging any issues with conda
 - conda install --yes $DEPS
-- conda install emat -c tmip -c defaults -c conda-forge -c plotly
+- conda install emat>=0.2.4 -c tmip -c defaults -c conda-forge -c plotly
 - conda list
 
 install:
